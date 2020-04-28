@@ -1,0 +1,48 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id "com.gradle.plugin-publish" version "0.11.0"
+    id "com.github.ben-manes.versions" version "0.21.0"
+    id 'maven'
+}
+
+compileJava   {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+group 'com.jayfella'
+version '1.0.0'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation "de.undercouch:gradle-download-task:3.4.3"
+}
+
+gradlePlugin {
+    plugins {
+        jmeDevKitPlugin {
+            id = 'com.jayfella'
+            implementationClass = 'com.jayfella.devkit.gradle.JmeDevKitGradlePlugin'
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://jmonkeyengine.org"
+    vcsUrl = website
+    description = "Gradle plugin providing integration for plugins made for the Jme DevKit platform."
+    tags = ["jmonkey", "plugin"]
+
+    plugins {
+        jmeDevKitPlugin {
+            displayName = "JmonkeyEngine DevKit Plugin Gradle Integration"
+        }
+    }
+}
