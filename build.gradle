@@ -12,7 +12,7 @@ compileJava   {
 }
 
 group 'com.jayfella'
-version '1.0.0'
+version '0.0.1'
 
 repositories {
     jcenter()
