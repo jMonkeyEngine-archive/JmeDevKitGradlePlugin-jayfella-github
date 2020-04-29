@@ -75,15 +75,12 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
 
     private void addCustomMethods() {
 
-        project.extensions.removeAllJmeTransients = { groupId , artifactId, version ->
+        // removes all transient dependencies already included in DevKit
+        project.extensions.removeIncludedTransients = { groupId , artifactId, version ->
 
-            ExternalModuleDependency dep = project.dependencies.create("$groupId:$artifactId:$version") as ExternalModuleDependency;
-
-            Map<String, String> excludes = new HashMap<>()
-            excludes.put("group", "org.jmonkeyengine")
-            dep.exclude(excludes)
-
-            return dep;
+            ExternalModuleDependency dep = project.dependencies.create("$groupId:$artifactId:$version") as ExternalModuleDependency
+            DevKit.removeIncludedTransients(dep)
+            return dep
 
         }
 
