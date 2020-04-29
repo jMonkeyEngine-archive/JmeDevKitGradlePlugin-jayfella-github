@@ -8,7 +8,9 @@ Still under development and subject to change.
 #### build.gradle
 ```groovy
 
-apply plugin: JmeDevKitGradlePlugin
+plugins {
+    id "com.jayfella.jme-devkit" version "0.0.2"
+}
 
 group 'com.jayfella'
 version '1.0.0'
