@@ -2,6 +2,8 @@ package com.jayfella.devkit.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.tasks.compile.JavaCompile
 
 class JmeDevKitGradlePlugin implements Plugin<Project> {
@@ -22,6 +24,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
         configureEncoding()
         addRepositories()
         addExtensionFunctions()
+        addCustomMethods()
     }
 
     /**
@@ -68,6 +71,22 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
         }
 
         Dependencies.configureProject(project)
+    }
+
+    private void addCustomMethods() {
+
+        project.extensions.removeAllJmeTransients = { groupId , artifactId, version ->
+
+            ExternalModuleDependency dep = project.dependencies.create("$groupId:$artifactId:$version") as ExternalModuleDependency;
+
+            Map<String, String> excludes = new HashMap<>()
+            excludes.put("group", "org.jmonkeyengine")
+            dep.exclude(excludes)
+
+            return dep;
+
+        }
+
     }
 
 }
