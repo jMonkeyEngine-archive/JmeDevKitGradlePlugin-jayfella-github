@@ -12,7 +12,7 @@ compileJava   {
 }
 
 group 'com.jayfella'
-version '0.0.1'
+version '0.0.2'
 
 repositories {
     jcenter()
@@ -28,7 +28,7 @@ dependencies {
 gradlePlugin {
     plugins {
         jmeDevKitPlugin {
-            id = 'com.jayfella'
+            id = 'com.jayfella.jme-devkit'
             implementationClass = 'com.jayfella.devkit.gradle.JmeDevKitGradlePlugin'
         }
     }
