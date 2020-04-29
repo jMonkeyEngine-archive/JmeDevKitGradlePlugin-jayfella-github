@@ -40,7 +40,6 @@ class Dependencies {
 
     }
 
-    // private static Dependency jmeDep(String groupId, String artifactId, String version) {
     private static Dependency jmeDep(String groupId, String artifactId) {
         String version = project.jmonkey.version
 
