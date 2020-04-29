@@ -31,6 +31,7 @@ class Dependencies {
             devKitApi = { dep('com.jayfella', 'devkit-api', "0.1") }
 
             jmeCore = { jmeDep('org.jmonkeyengine', 'jme3-core') }
+            jmePlugins = { jmeDep('org.jmonkeyengine', 'jme3-plugins') }
 
             lemur = { dep('com.simsilica', 'lemur', "1.13.0") }
             lemurProps = { dep('com.simsilica', 'lemur-props', "1.1.0") }
@@ -53,10 +54,7 @@ class Dependencies {
         }
 
         ExternalModuleDependency dep = depHandler.create("$groupId:$artifactId:$version") as ExternalModuleDependency;
-
-        Map<String, String> excludes = new HashMap<>()
-        excludes.put("group", "org.jmonkeyengine")
-        dep.exclude(excludes)
+        DevKit.removeIncludedTransients(dep)
 
         return dep;
     }
