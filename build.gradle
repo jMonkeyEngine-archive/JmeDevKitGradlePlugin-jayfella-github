@@ -38,7 +38,7 @@ pluginBundle {
     website = "https://jmonkeyengine.org"
     vcsUrl = "https://github.com/jayfella/JmeDevKitGradlePlugin"
     description = "Gradle plugin providing integration for plugins made for the Jme DevKit platform."
-    tags = ["jmonkey", "plugin"]
+    tags = [ "jmonkey", "jmonkeyengine" ]
 
     plugins {
         jmeDevKitPlugin {
