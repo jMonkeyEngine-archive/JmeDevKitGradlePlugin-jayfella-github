@@ -9,37 +9,34 @@ Still under development and subject to change.
 ```groovy
 
 plugins {
-    id "com.jayfella.jme-devkit" version "0.0.3"
+    id "com.jayfella.jme-devkit" version "0.0.4"
 }
 
 group 'com.jayfella'
 version '1.0.0'
 
-devkit {
-    // manually select a version, else the latest release is chosen.
-    version = "0.0.1"
-}
-
-jmonkey {
-    // manually select a version, else the latest release is chosen.
-    // version = "3.2.2-stable"
-}
-
-lemur {
-    // manually select a version, else the latest release is chosen.
-    // version = "1.13.0"
-    // props = "1.1.0"
-    // proto = "1.11.0"
-}
-
 dependencies {
 
+    // optionally specify a version on any dependencies
+    // if no version is specified, the latest version is used.
+    // compileOnly devkitCore("1.0.3")
+    // compileOnly lemur("1.13.0)
+
     // required
-    compileOnly devKitApi()
+    compileOnly devkitCore()
+    compileOnly devkitPlugin()
+    
+    compileOnly devkitMenu() // if you use the menu system.
+    compileOnly devkitWindow() // if you use the window system.
 
     // optional
     compileOnly jmeCore()
     compileOnly lemur()
+    compileOnly lemurProps()
+    compileOnly lemurProto()
+
+    // include a dependency but remove any dependencies that are already included in JmeDevKit
+    implementation removeIncludedTransients("com.simsilica", "jmec", "1.2.0-SNAPSHOT")
 
 }
 
