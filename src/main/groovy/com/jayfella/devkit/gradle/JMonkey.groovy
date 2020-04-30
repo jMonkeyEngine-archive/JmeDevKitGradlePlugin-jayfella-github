@@ -7,12 +7,12 @@ class JMonkey {
     public static final String NAME = "jmonkey"
     public static final String LATEST = "+"
 
-    private final Project project;
+    private final Project project
 
-    String version;
+    private String version
 
     JMonkey(Project project) {
-        this.project = project;
+        this.project = project
     }
 
     /**
