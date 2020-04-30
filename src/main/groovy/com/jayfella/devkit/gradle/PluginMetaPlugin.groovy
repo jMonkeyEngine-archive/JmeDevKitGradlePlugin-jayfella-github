@@ -10,6 +10,7 @@ class PluginMetaPlugin implements Plugin<Project> {
 
         project.with {
             extensions.create(JMonkey.NAME, JMonkey, project)
+            extensions.create(Lemur.NAME, Lemur, project)
         }
 
     }
