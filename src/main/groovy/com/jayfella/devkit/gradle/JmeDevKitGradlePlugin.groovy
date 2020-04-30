@@ -35,7 +35,6 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
                 apply('java')
                 apply('eclipse')
                 apply('idea')
-                apply(PluginMetaPlugin)
             }
 
         }

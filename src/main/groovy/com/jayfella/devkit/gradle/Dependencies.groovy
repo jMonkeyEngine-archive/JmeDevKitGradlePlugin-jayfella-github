@@ -60,23 +60,22 @@ class Dependencies {
 
         depHandler.ext {
 
-            devKitApi = { dep('com.jayfella', 'devkit-api', project.devkit.getVersion() as String) }
+            devkitCore = { version -> dep("com.jayfella", "devkit-core", version ? "$version" : "+") }
+            devkitMenu = { version -> dep("com.jayfella", "devkit-menu", version ? "$version" : "+") }
+            devkitPlugin = { version -> dep("com.jayfella", "devkit-plugin", version ? "$version" : "+") }
+            devkitTheme = { version -> dep("com.jayfella", "devkit-theme", version ? "$version" : "+") }
+            devkitWindow = { version -> dep("com.jayfella", "devkit-window", version ? "$version" : "+") }
 
-            jmeCore = { jmeDep('org.jmonkeyengine', 'jme3-core') }
-            jmePlugins = { jmeDep('org.jmonkeyengine', 'jme3-plugins') }
+            jmeCore = { version -> dep('org.jmonkeyengine', 'jme3-core', version ? "$version" : "+") }
+            jmeDesktop = { version -> dep('org.jmonkeyengine', 'jme3-desktop', version ? "$version" : "+") }
+            jmePlugins = { version -> dep('org.jmonkeyengine', 'jme3-plugins', version ? "$version" : "+") }
 
-            lemur = { dep('com.simsilica', 'lemur', project.lemur.getVersion() as String) }
-            lemurProps = { dep('com.simsilica', 'lemur-props', project.lemur.getPropsVersion() as String) }
-            lemurProto = { dep('com.simsilica', 'lemur-proto', project.lemur.getProtoVersion() as String) }
+            lemur = { version -> dep('com.simsilica', 'lemur', version ? "$version" : "+") }
+            lemurProps = { version -> dep('com.simsilica', 'lemur-props', version ? "$version" : "+") }
+            lemurProto = { version -> dep('com.simsilica', 'lemur-proto', version ? "$version" : "+") }
 
         }
 
-    }
-
-    private static Dependency jmeDep(String groupId, String artifactId) {
-        String version = project.jmonkey.getVersion()
-
-        return depHandler.create("$groupId:$artifactId:$version")
     }
 
     private static Dependency dep(String groupId, String artifactId, String version, String... requiredRepos) {
