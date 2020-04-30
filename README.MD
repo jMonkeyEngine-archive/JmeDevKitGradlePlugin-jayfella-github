@@ -40,4 +40,13 @@ dependencies {
 
 }
 
+configurations {
+    releaseJar.extendsFrom implementation
+}
+
+jar {
+    from configurations.releaseJar.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+
 ```
