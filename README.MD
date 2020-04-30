@@ -15,6 +15,18 @@ plugins {
 group 'com.jayfella'
 version '1.0.0'
 
+jmonkey {
+    // manually select a version, else the latest release is chosen.
+    // version = "3.2.2-stable"
+}
+
+lemur {
+    // manually select a version, else the latest release is chosen.
+    // version = "1.13.0"
+    // props = "1.1.0"
+    // proto = "1.11.0"
+}
+
 dependencies {
 
     // required
