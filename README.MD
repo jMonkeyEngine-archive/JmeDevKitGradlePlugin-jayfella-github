@@ -9,7 +9,7 @@ Still under development and subject to change.
 ```groovy
 
 plugins {
-    id "com.jayfella.jme-devkit" version "0.0.2"
+    id "com.jayfella.jme-devkit" version "0.0.3"
 }
 
 group 'com.jayfella'
