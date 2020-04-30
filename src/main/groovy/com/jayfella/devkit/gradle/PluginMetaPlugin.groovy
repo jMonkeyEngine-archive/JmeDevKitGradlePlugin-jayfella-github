@@ -9,6 +9,7 @@ class PluginMetaPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         project.with {
+            extensions.create(DevKit.NAME, DevKit, project)
             extensions.create(JMonkey.NAME, JMonkey, project)
             extensions.create(Lemur.NAME, Lemur, project)
         }
