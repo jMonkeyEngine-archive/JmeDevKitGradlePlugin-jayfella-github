@@ -28,9 +28,11 @@ dependencies {
     
     compileOnly devkitMenu() // if you use the menu system.
     compileOnly devkitWindow() // if you use the window system.
+    compileOnly devkitTheme() // if you use the theming system.
 
     // optional
-    compileOnly jmeCore()
+    compileOnly jmeCore() // if you use anything related to JME
+
     compileOnly lemur()
     compileOnly lemurProps()
     compileOnly lemurProto()
