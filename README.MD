@@ -15,6 +15,11 @@ plugins {
 group 'com.jayfella'
 version '1.0.0'
 
+devkit {
+    // manually select a version, else the latest release is chosen.
+    version = "0.0.1"
+}
+
 jmonkey {
     // manually select a version, else the latest release is chosen.
     // version = "3.2.2-stable"
