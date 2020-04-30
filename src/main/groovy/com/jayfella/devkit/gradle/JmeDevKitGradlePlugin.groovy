@@ -78,7 +78,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
         project.extensions.removeIncludedTransients = { groupId , artifactId, version ->
 
             ExternalModuleDependency dep = project.dependencies.create("$groupId:$artifactId:$version") as ExternalModuleDependency
-            DevKit.removeIncludedTransients(dep)
+            Dependencies.removeIncludedTransients(dep)
             return dep
 
         }
