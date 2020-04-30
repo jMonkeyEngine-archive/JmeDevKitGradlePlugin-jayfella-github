@@ -1,63 +1,29 @@
 package com.jayfella.devkit.gradle
 
-import org.gradle.api.artifacts.ExternalModuleDependency
+import org.gradle.api.Project
 
-/**
- * A list of dependencies that are already included in the DevKit API, and do not need to be included in a plugin.
- */
 class DevKit {
 
-    private static final String GROUP = "group"
-    private static final String MODULE = "module"
+    public static final String NAME = "devkit"
+    public static final String LATEST = "+"
 
-    // first index is group, the rest are modules.
-    private static final String[][] DEPENDENCIES = [
+    private final Project project
 
-            [ "org.jmonkeyengine",
-                    "jme3-core", "jme3-desktop", "jme3-lwjgl", "jme3-lwjgl3", "jme3-plugins", "jme3-jogg"
-            ],
+    String version
 
-            [ "com.simsilica",
-                    "lemur", "lemur-props", "lemur-proto"
-            ],
-
-            [ "org.codehaus.groovy",
-                    "groovy-all"
-            ],
-
-            [ "com.fasterxml.jackson.core",
-                    "jackson-core", "jackson-annotations", "jackson-databind"
-            ],
-
-            [ "org.slf4j",
-                    "slf4j-api", "jul-to-slf4j", "slf4j-log4j12"
-            ],
-
-            [ "log4j",
-                    "log4j"
-            ]
-    ]
-
-
-    private static exclude(ExternalModuleDependency dep, Map<String, String> map, String group, String module) {
-        map.put(GROUP, group)
-        map.put(MODULE, module)
-        dep.exclude(map)
+    DevKit(Project project) {
+        this.project = project
     }
 
-    static removeIncludedTransients(ExternalModuleDependency dep) {
-
-        Map<String, String> excluder
-
-        for (String[] str : DEPENDENCIES) {
-
-            for (int i = 1; i < str.length; i++) {
-                excluder = new HashMap<>()
-                exclude(dep, excluder, str[0], str[i])
-            }
-
-        }
-
+    /**
+     * Returns chosen DevKit version:
+     * If version not assigned returns dynamic latest version
+     *
+     * @return Chosen DevKit version
+     */
+    String getVersion() {
+        return version ? "$version" : LATEST
     }
+
 
 }
