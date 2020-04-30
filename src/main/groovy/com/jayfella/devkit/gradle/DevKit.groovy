@@ -21,6 +21,10 @@ class DevKit {
                     "lemur", "lemur-props", "lemur-proto"
             ],
 
+            [ "org.codehaus.groovy",
+                    "groovy-all"
+            ],
+
             [ "com.fasterxml.jackson.core",
                     "jackson-core", "jackson-annotations", "jackson-databind"
             ],
