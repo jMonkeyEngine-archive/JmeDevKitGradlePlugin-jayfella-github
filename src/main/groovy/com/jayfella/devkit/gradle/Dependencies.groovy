@@ -8,6 +8,38 @@ import org.gradle.api.artifacts.dsl.RepositoryHandler
 
 class Dependencies {
 
+    private static final String GROUP = "group"
+    private static final String MODULE = "module"
+
+     // A list of dependencies that are already included in the DevKit API, and do not need to be included in a plugin.
+     // The first index is group, the rest are modules.
+    private static final String[][] DEPENDENCIES = [
+
+            [ "org.jmonkeyengine",
+              "jme3-core", "jme3-desktop", "jme3-lwjgl", "jme3-lwjgl3", "jme3-plugins", "jme3-jogg"
+            ],
+
+            [ "com.simsilica",
+              "lemur", "lemur-props", "lemur-proto"
+            ],
+
+            [ "org.codehaus.groovy",
+              "groovy-all"
+            ],
+
+            [ "com.fasterxml.jackson.core",
+              "jackson-core", "jackson-annotations", "jackson-databind"
+            ],
+
+            [ "org.slf4j",
+              "slf4j-api", "jul-to-slf4j", "slf4j-log4j12"
+            ],
+
+            [ "log4j",
+              "log4j"
+            ]
+    ]
+
     private static Project project
     private static RepositoryHandler repoHandler
     private static DependencyHandler depHandler
@@ -28,7 +60,7 @@ class Dependencies {
 
         depHandler.ext {
 
-            devKitApi = { dep('com.jayfella', 'devkit-api', "0.1") }
+            devKitApi = { dep('com.jayfella', 'devkit-api', project.devkit.getVersion() as String) }
 
             jmeCore = { jmeDep('org.jmonkeyengine', 'jme3-core') }
             jmePlugins = { jmeDep('org.jmonkeyengine', 'jme3-plugins') }
@@ -54,11 +86,30 @@ class Dependencies {
         }
 
         ExternalModuleDependency dep = depHandler.create("$groupId:$artifactId:$version") as ExternalModuleDependency
-        DevKit.removeIncludedTransients(dep)
+        removeIncludedTransients(dep)
 
         return dep
     }
 
+    private static exclude(ExternalModuleDependency dep, Map<String, String> map, String group, String module) {
+        map.put(GROUP, group)
+        map.put(MODULE, module)
+        dep.exclude(map)
+    }
 
+    static removeIncludedTransients(ExternalModuleDependency dep) {
+
+        Map<String, String> excluder
+
+        for (String[] str : DEPENDENCIES) {
+
+            for (int i = 1; i < str.length; i++) {
+                excluder = new HashMap<>()
+                exclude(dep, excluder, str[0], str[i])
+            }
+
+        }
+
+    }
 
 }
