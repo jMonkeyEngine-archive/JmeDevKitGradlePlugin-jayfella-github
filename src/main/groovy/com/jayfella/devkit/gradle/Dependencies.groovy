@@ -8,9 +8,9 @@ import org.gradle.api.artifacts.dsl.RepositoryHandler
 
 class Dependencies {
 
-    private static Project project;
-    private static RepositoryHandler repoHandler;
-    private static DependencyHandler depHandler;
+    private static Project project
+    private static RepositoryHandler repoHandler
+    private static DependencyHandler depHandler
 
     private Dependencies() {
 
@@ -18,9 +18,9 @@ class Dependencies {
 
     static configureProject(Project project) {
 
-        this.project = project;
-        repoHandler = project.repositories;
-        depHandler = project.dependencies;
+        this.project = project
+        repoHandler = project.repositories
+        depHandler = project.dependencies
         addExtensions()
     }
 
@@ -33,16 +33,16 @@ class Dependencies {
             jmeCore = { jmeDep('org.jmonkeyengine', 'jme3-core') }
             jmePlugins = { jmeDep('org.jmonkeyengine', 'jme3-plugins') }
 
-            lemur = { dep('com.simsilica', 'lemur', "1.13.0") }
-            lemurProps = { dep('com.simsilica', 'lemur-props', "1.1.0") }
-            lemurProto = { dep('com.simsilica', 'lemur-proto', "1.11.0") }
+            lemur = { dep('com.simsilica', 'lemur', project.lemur.getVersion() as String) }
+            lemurProps = { dep('com.simsilica', 'lemur-props', project.lemur.getPropsVersion() as String) }
+            lemurProto = { dep('com.simsilica', 'lemur-proto', project.lemur.getProtoVersion() as String) }
 
         }
 
     }
 
     private static Dependency jmeDep(String groupId, String artifactId) {
-        String version = project.jmonkey.version
+        String version = project.jmonkey.getVersion()
 
         return depHandler.create("$groupId:$artifactId:$version")
     }
@@ -53,10 +53,10 @@ class Dependencies {
             repoHandler.ext."$repo"()
         }
 
-        ExternalModuleDependency dep = depHandler.create("$groupId:$artifactId:$version") as ExternalModuleDependency;
+        ExternalModuleDependency dep = depHandler.create("$groupId:$artifactId:$version") as ExternalModuleDependency
         DevKit.removeIncludedTransients(dep)
 
-        return dep;
+        return dep
     }
 
 
