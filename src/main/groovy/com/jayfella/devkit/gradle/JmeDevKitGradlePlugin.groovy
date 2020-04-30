@@ -2,7 +2,6 @@ package com.jayfella.devkit.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.tasks.compile.JavaCompile
 
