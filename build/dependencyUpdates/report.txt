@@ -1,9 +1,0 @@
-
-------------------------------------------------------------
-: Project Dependency Updates (report to plain text file)
-------------------------------------------------------------
-
-No dependencies found.
-
-Gradle release-candidate updates:
- - Gradle: [6.1 -> 6.3 -> 6.4-rc-3]
