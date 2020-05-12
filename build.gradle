@@ -2,7 +2,6 @@ plugins {
     id 'groovy'
     id 'java-gradle-plugin'
     id "com.gradle.plugin-publish" version "0.11.0"
-    id "com.github.ben-manes.versions" version "0.21.0"
     id 'maven'
 }
 
@@ -12,7 +11,7 @@ compileJava   {
 }
 
 group 'com.jayfella'
-version '0.0.4'
+version '0.0.5'
 
 repositories {
     jcenter()
@@ -21,8 +20,6 @@ repositories {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-
-    implementation "de.undercouch:gradle-download-task:3.4.3"
 }
 
 gradlePlugin {
