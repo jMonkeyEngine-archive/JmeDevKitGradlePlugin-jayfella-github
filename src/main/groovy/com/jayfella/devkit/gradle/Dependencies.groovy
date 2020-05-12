@@ -61,10 +61,10 @@ class Dependencies {
         depHandler.ext {
 
             devkitCore = { version -> dep("com.jayfella", "devkit-core", version ? "$version" : "+") }
-            devkitMenu = { version -> dep("com.jayfella", "devkit-menu", version ? "$version" : "+") }
+            devkitMenu = { version -> dep("com.jayfella", "lemur-menubar", version ? "$version" : "+") }
             devkitPlugin = { version -> dep("com.jayfella", "devkit-plugin", version ? "$version" : "+") }
             devkitTheme = { version -> dep("com.jayfella", "devkit-theme", version ? "$version" : "+") }
-            devkitWindow = { version -> dep("com.jayfella", "devkit-window", version ? "$version" : "+") }
+            devkitWindow = { version -> dep("com.jayfella", "lemur-window", version ? "$version" : "+") }
 
             jmeCore = { version -> dep('org.jmonkeyengine', 'jme3-core', version ? "$version" : "+") }
             jmeDesktop = { version -> dep('org.jmonkeyengine', 'jme3-desktop', version ? "$version" : "+") }
