@@ -2,7 +2,9 @@ package com.jayfella.devkit.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
+import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.compile.JavaCompile
 
 class JmeDevKitGradlePlugin implements Plugin<Project> {
@@ -22,8 +24,8 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
         addPlugins()
         configureEncoding()
         addRepositories()
-        addExtensionFunctions()
-        addCustomMethods()
+        configureTasks()
+        configureDependencies()
     }
 
     /**
@@ -33,8 +35,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
         project.with {
             plugins.with {
                 apply('java')
-                apply('eclipse')
-                apply('idea')
+                apply('application')
             }
 
         }
@@ -60,28 +61,19 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     }
 
     /**
-     * Adds repositories and dependencies extension functions
+     * Adds tasks
      */
-    private void addExtensionFunctions() {
-        project.repositories {
-            mavenLocal()
-            jcenter()
-        }
+    private void configureTasks() {
 
-        Dependencies.configureProject(project)
+        project.task("runSdk", type: JavaExec) {
+            main = "com.jayfella.devkit.Main"
+            classpath = project.sourceSets.main.runtimeClasspath
+        }
     }
 
-    private void addCustomMethods() {
-
-        // removes all transient dependencies already included in DevKit
-        project.extensions.removeIncludedTransients = { groupId , artifactId, version ->
-
-            ExternalModuleDependency dep = project.dependencies.create("$groupId:$artifactId:$version") as ExternalModuleDependency
-            Dependencies.removeIncludedTransients(dep)
-            return dep
-
-        }
-
+    private void configureDependencies() {
+        Dependency dep = project.dependencies.create("com.jayfella:jme-jfx-devkit:0.0.1")
+        project.dependencies.add("runtimeOnly", dep);
     }
 
 }
