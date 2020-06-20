@@ -1,7 +1,7 @@
 plugins {
     id 'groovy'
     id 'java-gradle-plugin'
-    id "com.gradle.plugin-publish" version "0.11.0"
+    id "com.gradle.plugin-publish" version "0.12.0"
     id 'maven'
 }
 
@@ -11,7 +11,7 @@ compileJava   {
 }
 
 group 'com.jayfella'
-version '0.0.5'
+version '0.0.6'
 
 repositories {
     jcenter()
@@ -34,7 +34,7 @@ gradlePlugin {
 pluginBundle {
     website = "https://jmonkeyengine.org"
     vcsUrl = "https://github.com/jayfella/JmeDevKitGradlePlugin"
-    description = "Gradle plugin providing integration for plugins made for the Jme DevKit platform."
+    description = "Gradle plugin providing integration with the Jme DevKit application."
     tags = [ "jmonkey", "jmonkeyengine" ]
 
     plugins {
