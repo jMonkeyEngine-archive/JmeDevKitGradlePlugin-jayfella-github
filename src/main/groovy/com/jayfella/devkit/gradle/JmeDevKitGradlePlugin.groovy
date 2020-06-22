@@ -7,6 +7,7 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.internal.jvm.Jvm
+import org.gradle.internal.os.OperatingSystem
 
 class JmeDevKitGradlePlugin implements Plugin<Project> {
 
@@ -85,8 +86,29 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
                 }
             }
 
-            Dependency jfxDep = project.dependencies.create("org.openjfx:javafx:14.0.1")
-            project.dependencies.add("implementation", jfxDep)
+
+            String[] dependencies = [
+                    "javafx-base",
+                    "javafx-controls",
+                    "javafx-fxml",
+                    "javafx-graphics",
+                    "javafx-swing"
+            ]
+
+            String jfxVersion = "14.0.1"
+
+            String os = null;
+
+            switch (OperatingSystem.current()) {
+                case OperatingSystem.LINUX : os = "linux"; break
+                case OperatingSystem.WINDOWS : os = "win"; break
+                case OperatingSystem.MAC_OS : os = "mac"; break;
+            }
+
+            for (String entry : dependencies) {
+                Dependency jfxDep = project.dependencies.create("org.openjfx:" + entry + ":" + jfxVersion + ":" + os)
+                project.dependencies.add("compile", jfxDep)
+            }
         }
 
     }
