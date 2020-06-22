@@ -57,6 +57,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void addRepositories() {
         project.repositories {
             jcenter()
+            maven { url  "https://dl.bintray.com/dua3/public" }
         }
     }
 
