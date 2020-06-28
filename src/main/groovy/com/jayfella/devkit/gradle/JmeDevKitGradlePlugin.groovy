@@ -1,13 +1,11 @@
 package com.jayfella.devkit.gradle
 
-import org.gradle.api.JavaVersion
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.internal.jvm.Jvm
-import org.gradle.internal.os.OperatingSystem
 
 class JmeDevKitGradlePlugin implements Plugin<Project> {
 
@@ -57,7 +55,6 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void addRepositories() {
         project.repositories {
             jcenter()
-            maven { url  "https://dl.bintray.com/dua3/public" }
         }
     }
 
@@ -67,7 +64,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void configureTasks() {
 
         project.task("runSdk", type: JavaExec) {
-            main = "com.jayfella.devkit.Main"
+            main = "com.jayfella.importer.Main"
             classpath = project.sourceSets.main.runtimeClasspath
         }
     }
@@ -75,42 +72,8 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void configureDependencies() {
 
         // include the devkit as a dependency
-        Dependency dep = project.dependencies.create("com.jayfella:jme-jfx-devkit:0.0.2")
+        Dependency dep = project.dependencies.create("com.jayfella:jme-swing-devkit:1.0.0")
         project.dependencies.add("runtimeOnly", dep);
-
-        // if we're not using java 8 we must include javafx
-        if (Jvm.current().javaVersion > JavaVersion.VERSION_1_8) {
-
-            project.with {
-                plugins.with {
-                    apply({ 'org.openjfx.javafxplugin:0.0.8' })
-                }
-            }
-
-
-            String[] dependencies = [
-                    "javafx-base",
-                    "javafx-controls",
-                    "javafx-fxml",
-                    "javafx-graphics",
-                    "javafx-swing"
-            ]
-
-            String jfxVersion = "14.0.1"
-
-            String os = null;
-
-            switch (OperatingSystem.current()) {
-                case OperatingSystem.LINUX : os = "linux"; break
-                case OperatingSystem.WINDOWS : os = "win"; break
-                case OperatingSystem.MAC_OS : os = "mac"; break;
-            }
-
-            for (String entry : dependencies) {
-                Dependency jfxDep = project.dependencies.create("org.openjfx:" + entry + ":" + jfxVersion + ":" + os)
-                project.dependencies.add("compile", jfxDep)
-            }
-        }
 
     }
 
