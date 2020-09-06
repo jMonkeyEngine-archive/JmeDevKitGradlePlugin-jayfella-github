@@ -54,6 +54,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
      */
     private void addRepositories() {
         project.repositories {
+            mavenLocal()
             jcenter()
         }
     }
@@ -72,7 +73,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void configureDependencies() {
 
         // include the devkit as a dependency
-        Dependency dep = project.dependencies.create("com.jayfella:jme-swing-devkit:1.0.2")
+        Dependency dep = project.dependencies.create("com.jayfella:jme-swing-devkit:1.0.3")
         project.dependencies.add("runtimeOnly", dep);
 
     }
