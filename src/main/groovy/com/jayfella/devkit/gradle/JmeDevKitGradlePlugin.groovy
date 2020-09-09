@@ -14,6 +14,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.project = project
+        addDevkitMethods()
         configureProject()
     }
 
@@ -73,8 +74,8 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void configureDependencies() {
 
         // include the devkit as a dependency
-        Dependency dep = project.dependencies.create("com.jayfella:jme-swing-devkit:1.0.4")
-        project.dependencies.add("runtimeOnly", dep);
+        Dependency dep = project.dependencies.create("com.jayfella:jme-swing-devkit:1.0.5")
+        project.dependencies.add("runtimeOnly", dep)
 
     }
 
