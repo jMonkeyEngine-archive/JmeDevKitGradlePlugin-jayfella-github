@@ -14,7 +14,6 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.project = project
-        addDevkitMethods()
         configureProject()
     }
 
