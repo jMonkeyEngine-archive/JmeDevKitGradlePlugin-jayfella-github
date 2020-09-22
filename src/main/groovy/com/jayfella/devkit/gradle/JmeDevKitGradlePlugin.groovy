@@ -65,7 +65,7 @@ class JmeDevKitGradlePlugin implements Plugin<Project> {
     private void configureTasks() {
 
         project.task("runSdk", type: JavaExec) {
-            main = "com.jayfella.importer.Main"
+            main = "com.jayfella.devkit.Main"
             classpath = project.sourceSets.main.runtimeClasspath
         }
     }
